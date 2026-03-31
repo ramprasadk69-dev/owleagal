@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O. W. Legal Associates® — Advocates &amp; Legal Consultants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       DISCLAIMER OVERLAY
+  ══════════════════════════════════════════════ -->
+  <div id="disclaimer-overlay">
+    <div class="disclaimer-box">
+      <div class="disc-rule"></div>
+      <h2>Legal Disclaimer</h2>
+      <p>The Bar Council of India does not permit advertisement or solicitation by advocates
+         in any form or manner. By accessing this website, you acknowledge that you are
+         seeking information relating to <strong>O. W. Legal Associates®</strong> of your
+         own accord and that there has been no form of solicitation, advertisement or inducement.</p>
+      <p>The content of this website is for informational purposes only and should not be
+         interpreted as soliciting or advertisement. No material or information provided on
+         this website should be construed as legal advice. O. W. Legal Associates® shall not
+         be liable for consequences of any action taken by relying on the information provided
+         on this website.</p>
+      <button class="disc-btn" onclick="acceptDisclaimer()">I Accept &amp; Proceed to Website</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       TOP NAVIGATION
+       Logo left  |  Search icon + ||| icon right
+  ══════════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div><img style="width:40px; height: 40px;" src="./logo/logo.png" ></div>
+      O. W. Legal Associates®
+    </a>
+
+    <div class="nav-icons">
+      <!-- Search icon -->
+      <button class="nav-search-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10.5" cy="10.5" r="6.5"/>
+          <line x1="15.5" y1="15.5" x2="21" y2="21"/>
+        </svg>
+      </button>
+
+      <!-- Three-vertical-bar (|||) menu button -->
+      <button class="nav-menu-btn" id="nav-menu-btn"
+              aria-label="Open navigation" aria-expanded="false"
+              aria-controls="side-nav">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       SIDE NAV OVERLAY (dark scrim)
+  ══════════════════════════════════════════════ -->
+  <div class="side-overlay" id="side-overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       SIDE NAV PANEL
+       Slides in from right on ||| click
+  ══════════════════════════════════════════════ -->
+  <aside class="side-nav" id="side-nav" role="dialog" aria-label="Site navigation">
+
+    <!-- Close button -->
+    <button class="side-close-btn" id="side-close-btn" aria-label="Close navigation">×</button>
+
+    <!-- Primary links -->
+    <ul>
+      <li>
+        <a href="#hero">
+          Home <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#expertise">
+          Expertise <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#people">
+          About the Firm <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#thought">
+          Legal Insights <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#legacy">
+          Legacy <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact">
+          Contact Us <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact">
+          Internship <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact">
+          Careers <span class="ln-arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact">
+          Pro Bono <span class="ln-arrow">→</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Footer links inside panel -->
+    <div class="side-nav-foot">
+      <table>
+        <td style="width: 50px;">
+          <tr><a href="tel:08663552344"><img style="width:40px; height: 40px;" src="./logo/linkedin.png" ></a></tr>
+        </td>
+        <td style="width: 50px;">
+          <tr><a href="https://wa.me/917997696104"><img style="width:40px; height: 40px;" src="./logo/insta.avif" ></a></tr>
+        </td>
+        <td style="width: 50px;">
+          <tr><a href="mailto:Support@owlegalassociates.com"><img style="width:50px; height: 50px;" src="./logo/download.png" ></a></tr>
+        </td>
+      </table>      
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════════════════════
+       VERTICAL DOT NAV (auto-built by JS)
+  ══════════════════════════════════════════════ -->
+  <nav class="dot-nav" id="dot-nav" aria-label="Section navigation"></nav>
+
+  <!-- ══════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-content reveal">
+      
+      <h1 class="hero-title">Empowering <label style='color:red'>Justice,</label><br>Enabling <em>legal<br>Excellence.</em></h1>
+      <p class="hero-sub">A premier full-service law firm delivering justice-oriented, client-first
+        legal solutions across Civil, Criminal, Matrimonial, Arbitration, and Corporate matters.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary-btn">Book Consultation</a>
+        <a href="#expertise" class="btn-outline">Our Practice Areas</a>
+      </div>
+    </div>
+
+    <div class="hero-stats-bar">
+      <div class="stat-cell">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Cases Handled</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Practice Areas</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Excellence</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       EXPERTISE
+  ══════════════════════════════════════════════ -->
+  <section id="expertise" class="section">
+    <div class="inner reveal">
+      <div class="expertise-grid">
+        <div>
+          <div class="section-label">Our Expertise</div>
+          <h2 class="section-heading light">Facilitating <em>justice-oriented</em> legal solutions</h2>
+          <p class="section-body light">Our expertise across diverse practice areas covers the
+            varied and nuanced needs of every client — backed by years of courtroom experience
+            and deep specialization across all forums.</p>
+          <a href="#contact" class="btn-primary">Book a Consultation</a>
+        </div>
+        <div class="practice-grid">
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">01</div>
+            <div class="pi-title">Civil Litigation</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">02</div>
+            <div class="pi-title">Criminal Defence</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">03</div>
+            <div class="pi-title">Matrimonial &amp; Estate</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">04</div>
+            <div class="pi-title">Arbitration &amp; Mediation</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">05</div>
+            <div class="pi-title">Consumer Disputes</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">06</div>
+            <div class="pi-title">Compliance &amp; Regulatory</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">07</div>
+            <div class="pi-title">Writs &amp; Appeals</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+          <a href="#contact" class="practice-item">
+            <div class="pi-num">08</div>
+            <div class="pi-title">Insurance &amp; Liability</div>
+            <div class="pi-arrow">→ Explore</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       PEOPLE / ABOUT
+  ══════════════════════════════════════════════ -->
+  <section id="people" class="section">
+    <div class="inner reveal">
+      <div class="people-grid">
+        <div class="people-image-wrap">
+          <img src="https://images.unsplash.com/photo-1593115057322-e94b77572f20?w=900&q=80"
+               alt="O. W. Legal Associates office">
+          <div class="people-badge">
+            <div class="pib-num">2</div>
+            <div class="pib-label">Offices</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">Our People</div>
+          <h2 class="section-heading dark">Home to <em>inspired</em> legal performances</h2>
+          <p class="section-body dark">O. W. Legal Associates® is a distinguished full-service
+            law firm based in Vijayawada and Ongole, Andhra Pradesh. Our seasoned advocates bring
+            deep expertise and unwavering commitment to every client engagement.</p>
+          <ul class="why-list">
+            <li>Registered with the Bar Council of Andhra Pradesh</li>
+            <li>Client-centric approach with transparent communication</li>
+            <li>Proven track record across district courts and High Courts</li>
+            <li>Strict confidentiality and professional ethics</li>
+            <li>Pro bono commitment to underserved communities</li>
+            <li>Offices in Vijayawada and Ongole for accessibility</li>
+          </ul>
+          <a href="#contact" class="btn-primary btn-dark">Learn About the Firm</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       THOUGHT LEADERSHIP
+  ══════════════════════════════════════════════ -->
+  <section id="thought" class="section">
+    <div class="inner reveal">
+      <div class="thought-header">
+        <div>
+          <div class="section-label">Legal Insights</div>
+          <h2 class="section-heading light" style="margin-bottom:0">
+            Leveraging <em>insight</em> to<br>script legal discourse
+          </h2>
+        </div>
+        <a href="#" class="btn-outline">View All Articles</a>
+      </div>
+      <div class="articles-grid">
+        <a href="#" class="article-card featured">
+          <div class="ac-image"></div>
+          <div class="ac-body">
+            <div class="ac-tag">Legal Commentary</div>
+            <div class="ac-title">An Agreement with Nature: Legal Reimagining in Modern Advocacy</div>
+            <p class="ac-excerpt">A reflection on the evolving relationship between environmental
+              law and contemporary advocacy practice in India's courts.</p>
+            <div class="ac-meta"><span>22 Feb 2026</span><span>9 min read</span></div>
+          </div>
+        </a>
+        <a href="#" class="article-card">
+          <div class="ac-tag">Property Law</div>
+          <div class="ac-title">Understanding RERA Compliance in Andhra Pradesh</div>
+          <p class="ac-excerpt">A comprehensive guide for property buyers and developers
+            navigating the regulatory landscape.</p>
+          <div class="ac-meta"><span>Jan 2026</span><span>6 min read</span></div>
+        </a>
+        <a href="#" class="article-card">
+          <div class="ac-tag">Family Law</div>
+          <div class="ac-title">Evolving Standards in Matrimonial Proceedings</div>
+          <p class="ac-excerpt">Recent judicial trends reshaping maintenance and custody
+            determinations across Indian courts.</p>
+          <div class="ac-meta"><span>Dec 2025</span><span>5 min read</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       LEGACY
+  ══════════════════════════════════════════════ -->
+  <section id="legacy" class="section">
+    <div class="inner reveal">
+      <div class="legacy-grid">
+        <div>
+          <div class="section-label">Our Legacy</div>
+          <h2 class="section-heading dark">
+            Shaping Andhra Pradesh's <em>legal present</em> and future
+          </h2>
+          <p class="section-body dark">Our pillars of success are grounded in our commitment to
+            justice, integrity, and excellence. We provide pragmatic, client-first legal solutions
+            that create meaningful and long-term impact across Vijayawada and Ongole.</p>
+          <div class="checkmarks">
+            <div class="checkmark-item">Over a decade of dedicated legal practice in civil and criminal forums</div>
+            <div class="checkmark-item">Consistent record of favorable outcomes across all practice areas</div>
+            <div class="checkmark-item">Pro bono legal aid for economically disadvantaged members of society</div>
+            <div class="checkmark-item">Active participation in legal education through internship programs</div>
+          </div>
+          <a href="#contact" class="btn-primary btn-dark">Schedule a Consultation</a>
+        </div>
+        <div class="legacy-image-wrap">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80"
+               alt="Legal practice">
+          <div class="legacy-badge"><p>10+</p><span>Years of Excellence</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="contact-grid reveal">
+      <div>
+        <div class="contact-label">Get In Touch</div>
+        <h2 class="contact-heading">Schedule a <em>Consultation</em></h2>
+        <p class="contact-desc">Our advocates are available to provide expert legal guidance.
+          Fill in the form and our team will confirm your appointment within 24 hours.</p>
+        <div>
+          <div class="ci-item">
+            <div class="ci-label">Head Office</div>
+            <div class="ci-value">HIG-161, H.B. Colony, Bhavanipuram,<br>Vijayawada – 520012, Andhra Pradesh</div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label">Branch</div>
+            <div class="ci-value">Flat No. 609, Indrani Heights,<br>Ongole – 523001, Andhra Pradesh</div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label">Phone</div>
+            <div class="ci-value">
+              <a href="tel:08663552344">0866-3552344</a><br>
+              <a href="tel:0859224693">08592-2469398</a>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label">WhatsApp</div>
+            <div class="ci-value"><a href="https://wa.me/917997696104">+91 7997 696 104</a></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:Support@owlegalassociates.com">Support@owlegalassociates.com</a></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label">Hours</div>
+            <div class="ci-value">Mon – Sat &nbsp;|&nbsp; 08:00 AM – 09:00 PM</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-2col">
+          <div class="form-row"><label>Full Name *</label><input type="text" placeholder="Your full name"></div>
+          <div class="form-row"><label>Phone *</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+        </div>
+        <div class="form-row"><label>Email Address *</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-row">
+          <label>Type of Matter *</label>
+          <select>
+            <option value="">— Select Case Type —</option>
+            <option>Civil Litigation</option>
+            <option>Criminal Defence</option>
+            <option>Matrimonial Disputes</option>
+            <option>Estate Planning &amp; Succession</option>
+            <option>Arbitration / Mediation</option>
+            <option>Consumer Dispute</option>
+            <option>Compliance / Regulatory</option>
+            <option>Writ / Constitutional Matter</option>
+            <option>Insurance / Motor Accident</option>
+            <option>Property Matter</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Preferred Date *</label><input type="date"></div>
+        <div class="form-row"><label>Brief Description</label>
+          <textarea placeholder="Briefly describe your legal matter…"></textarea>
+        </div>
+        <button class="form-submit">Submit Consultation Request</button>
+        <p class="form-note">Your information is secure and confidential. We do not share your data with third parties.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">O. W. Legal Associates®</div>
+          <div class="footer-tagline">Justice · Integrity · Excellence</div>
+          <p class="footer-desc">A premier full-service law firm based in Vijayawada and Ongole,
+            Andhra Pradesh, committed to client-first legal representation.</p>
+          <p class="footer-reg">Registered with Bar Council of Andhra Pradesh</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Quick Links</div>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About the Firm</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Practice Areas</a></li>
+            <li><a href="#">Pro Bono</a></li>
+            <li><a href="#">Articles</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Practice Areas</div>
+          <ul>
+            <li><a href="#">Civil Litigation</a></li>
+            <li><a href="#">Criminal Defence</a></li>
+            <li><a href="#">Matrimonial &amp; Estate</a></li>
+            <li><a href="#">Arbitration &amp; Mediation</a></li>
+            <li><a href="#">Consumer Disputes</a></li>
+            <li><a href="#">Writs &amp; Appeals</a></li>
+            <li><a href="#">Insurance &amp; Liability</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Opportunities</div>
+          <ul>
+            <li><a href="#">Summer Internship</a></li>
+            <li><a href="#">Winter Internship</a></li>
+            <li><a href="#">Virtual Internship</a></li>
+            <li><a href="#">Junior Associate</a></li>
+            <li><a href="#">Para-Legal Assistant</a></li>
+            <li><a href="#">Senior Counsel</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 O. W. Legal Associates®. All Rights Reserved. |
+          Vijayawada &amp; Ongole, Andhra Pradesh.</div>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Internship Policy</a>
+          <a href="#">Employment Policy</a>
+          <a href="#">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       WHATSAPP FAB
+  ══════════════════════════════════════════════ -->
+  <a href="https://wa.me/917997696104?text=Hello%20O.%20W.%20Legal%20Associates%2C%20I%20would%20like%20to%20enquire%20about%20legal%20services."
+     class="wa-fab" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="main.js"></script>
+</body>
+</html>
