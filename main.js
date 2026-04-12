@@ -96,28 +96,7 @@ function acceptDisclaimer() {
     { id: 'contact',   label: 'Contact'    },
   ];
 
-  // Build dot nav HTML
-  const dotNav = document.getElementById('dot-nav');
-  if (!dotNav) return;
-
-  sections.forEach((sec, i) => {
-    // Connector line before each dot (except first)
-    if (i > 0) {
-      const line = document.createElement('div');
-      line.className = 'dot-nav-connector';
-      dotNav.appendChild(line);
-    }
-    const item = document.createElement('a');
-    item.href = `#${sec.id}`;
-    item.className = 'dot-nav-item';
-    item.dataset.target = sec.id;
-    item.innerHTML = `
-      <span class="dot-nav-label">${sec.label}</span>
-      <span class="dot-nav-dot"></span>
-    `;
-    dotNav.appendChild(item);
-  });
-
+  
   // Light-section detection: sections with white bg
   const lightSectionIds = new Set(['people', 'legacy']);
 
