@@ -47,15 +47,81 @@ body { background: var(--white); color: var(--black); font-family: var(--sans); 
 .disc-btn:hover { background: var(--gold); color: var(--black); }
 
 /* ═══════════════════════════════════════════════════════
+   NEWS TICKER BAR
+═══════════════════════════════════════════════════════ */
+.news-ticker-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 2100;
+  height: 34px;
+  background: var(--black);
+  border-bottom: 1px solid rgba(201,168,76,0.35);
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+
+.ticker-label {
+  flex-shrink: 0;
+  padding: 0 1rem 0 var(--px);
+  font-family: var(--sans); font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold);
+  border-right: 1px solid rgba(201,168,76,0.3);
+  white-space: nowrap;
+  height: 100%; display: flex; align-items: center;
+}
+
+.ticker-track-wrap {
+  flex: 1; overflow: hidden; position: relative;
+}
+
+.ticker-track {
+  display: inline-flex; align-items: center; gap: 0;
+  white-space: nowrap;
+  animation: ticker-scroll 42s linear infinite;
+  will-change: transform;
+}
+.ticker-track:hover { animation-play-state: paused; }
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-family: var(--sans); font-size: 0.68rem; font-weight: 300;
+  color: rgba(248,246,241,0.72);
+  padding: 0 2rem;
+  cursor: default;
+  transition: color 0.2s;
+}
+.ticker-item:hover { color: var(--gold); }
+
+.ticker-sep {
+  color: rgba(201,168,76,0.5);
+  font-size: 0.45rem;
+  flex-shrink: 0;
+}
+
+.ticker-close {
+  flex-shrink: 0;
+  background: none; border: none; cursor: pointer;
+  color: rgba(248,246,241,0.3);
+  font-size: 1.1rem; line-height: 1;
+  padding: 0 0.8rem 0 0.5rem;
+  transition: color 0.2s;
+  height: 100%; display: flex; align-items: center;
+}
+.ticker-close:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════
    TOP NAVIGATION BAR
    Logo left | Nav links centre | Social icons + CTA right
 ═══════════════════════════════════════════════════════ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+  position: fixed; top: 34px; left: 0; right: 0; z-index: 2000;
   padding: 0 var(--px);
   height: 68px;
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
-  transition: background 0.4s, box-shadow 0.4s;
+  transition: background 0.4s, box-shadow 0.4s, top 0.3s;
 }
 nav.scrolled {
   background: rgba(248,246,241,0.97); backdrop-filter: blur(14px);
@@ -134,7 +200,7 @@ nav.scrolled .nav-hamburger span { background: var(--black); }
 
 /* ── Mobile dropdown menu ── */
 .nav-links.mobile-open {
-  position: fixed; top: 68px; left: 0; right: 0;
+  position: fixed; top: 102px; left: 0; right: 0;
   flex-direction: column; justify-content: flex-start;
   background: rgba(10,10,10,0.98); backdrop-filter: blur(12px);
   padding: 1rem 0 1.5rem;
