@@ -27,45 +27,38 @@ function acceptDisclaimer() {
   onScroll();
 })();
 
-/* ─── SIDE NAV PANEL ─────────────────────────────────── */
+/* ─── MOBILE HAMBURGER NAV ───────────────────────────── */
 (function () {
-  const menuBtn   = document.getElementById('nav-menu-btn');
-  const sideNav   = document.getElementById('side-nav');
-  const overlay   = document.getElementById('side-overlay');
-  const closeBtn  = document.getElementById('side-close-btn');
-  if (!menuBtn || !sideNav) return;
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  if (!hamburger || !navLinks) return;
 
-  function openPanel() {
-    sideNav.classList.add('open');
-    overlay && overlay.classList.add('open');
-    menuBtn.classList.add('open');
-    menuBtn.setAttribute('aria-expanded', 'true');
+  function openMenu() {
+    navLinks.classList.add('mobile-open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
 
-  function closePanel() {
-    sideNav.classList.remove('open');
-    overlay && overlay.classList.remove('open');
-    menuBtn.classList.remove('open');
-    menuBtn.setAttribute('aria-expanded', 'false');
+  function closeMenu() {
+    navLinks.classList.remove('mobile-open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
-  menuBtn.addEventListener('click', () => {
-    sideNav.classList.contains('open') ? closePanel() : openPanel();
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.contains('mobile-open') ? closeMenu() : openMenu();
   });
 
-  closeBtn && closeBtn.addEventListener('click', closePanel);
-  overlay  && overlay.addEventListener('click', closePanel);
-
-  // Close on any link click inside panel
-  sideNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closePanel);
+  // Close on any nav link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
   // Close on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sideNav.classList.contains('open')) closePanel();
+    if (e.key === 'Escape') closeMenu();
   });
 })();
 
