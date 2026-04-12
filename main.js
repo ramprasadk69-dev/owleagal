@@ -84,58 +84,6 @@ function acceptDisclaimer() {
   });
 })();
 
-/* ─── VERTICAL DOT NAV ───────────────────────────────── */
-(function () {
-  // Section IDs to track and their display labels
-  const sections = [
-    { id: 'hero',      label: 'Home'       },
-    { id: 'expertise', label: 'Expertise'  },
-    { id: 'people',    label: 'People'     },
-    { id: 'thought',   label: 'Insights'   },
-    { id: 'legacy',    label: 'Legacy'     },
-    { id: 'contact',   label: 'Contact'    },
-  ];
-
-  
-  // Light-section detection: sections with white bg
-  const lightSectionIds = new Set(['people', 'legacy']);
-
-  // IntersectionObserver to track active section
-  const sectionEls = sections
-    .map(s => document.getElementById(s.id))
-    .filter(Boolean);
-
-  const dotItems = dotNav.querySelectorAll('.dot-nav-item');
-
-  function setActive(id) {
-    dotItems.forEach(item => {
-      item.classList.toggle('active', item.dataset.target === id);
-    });
-    // Switch dot color for light/dark bg sections
-    document.body.classList.toggle('in-light-section', lightSectionIds.has(id));
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      // Find the entry that is most visible
-      let best = null;
-      let bestRatio = 0;
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
-          bestRatio = entry.intersectionRatio;
-          best = entry;
-        }
-      });
-      if (best) setActive(best.target.id);
-    },
-    { threshold: [0.3, 0.6] }
-  );
-
-  sectionEls.forEach(el => observer.observe(el));
-  // Set first as default
-  setActive('hero');
-})();
-
 /* ─── SCROLL REVEAL ──────────────────────────────────── */
 (function () {
   const els = document.querySelectorAll('.reveal');
