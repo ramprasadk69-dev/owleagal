@@ -25,6 +25,28 @@ function acceptDisclaimer() {
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // When ticker bar is closed, shift nav up to top: 0
+  const ticker = document.getElementById('news-ticker-bar');
+  if (ticker) {
+    const closeBtn = ticker.querySelector('.ticker-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        navbar.style.top = '0';
+        // also fix mobile dropdown
+        const links = document.getElementById('nav-links');
+        if (links) links.style.setProperty('--mobile-top', '68px');
+      });
+    }
+  }
+})();
+
+/* ─── NEWS TICKER SEAMLESS LOOP ──────────────────────── */
+(function () {
+  const track = document.getElementById('ticker-track');
+  if (!track) return;
+  // Duplicate content so scroll appears infinite
+  track.innerHTML += track.innerHTML;
 })();
 
 /* ─── MOBILE HAMBURGER NAV ───────────────────────────── */
