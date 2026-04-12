@@ -32,6 +32,30 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
+       NEWS TICKER BAR
+  ══════════════════════════════════════════════ -->
+  <div class="news-ticker-bar" id="news-ticker-bar">
+    <span class="ticker-label">Latest News</span>
+    <div class="ticker-track-wrap">
+      <div class="ticker-track" id="ticker-track">
+        <span class="ticker-item">🏛️ O. W. Legal Associates® successfully argued before the Andhra Pradesh High Court in a landmark property rights case — verdict in favour of client.</span>
+        <span class="ticker-sep">◆</span>
+        <span class="ticker-item">📋 New RERA guidelines for Andhra Pradesh effective from March 2026 — consult our property law team for compliance guidance.</span>
+        <span class="ticker-sep">◆</span>
+        <span class="ticker-item">⚖️ Firm recognised among Top 10 Legal Practices in Andhra Pradesh by Legal Era Magazine 2026.</span>
+        <span class="ticker-sep">◆</span>
+        <span class="ticker-item">📢 Summer Internship 2026 applications now open — law students from all universities welcome to apply.</span>
+        <span class="ticker-sep">◆</span>
+        <span class="ticker-item">🤝 Pro Bono Legal Aid Camp — Vijayawada District Courts, 20 April 2026. Free consultation for eligible citizens.</span>
+        <span class="ticker-sep">◆</span>
+        <span class="ticker-item">📰 Supreme Court issues new guidelines on matrimonial mediation proceedings — read our full analysis in Legal Insights.</span>
+        <span class="ticker-sep">◆</span>
+      </div>
+    </div>
+    <button class="ticker-close" onclick="document.getElementById('news-ticker-bar').style.display='none'" aria-label="Close news ticker">×</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
        TOP NAVIGATION BAR
        Logo left | Nav links centre | Social icons + Contact CTA right
   ══════════════════════════════════════════════ -->
@@ -54,7 +78,7 @@
 
     <!-- Right: social icons + Contact CTA + mobile hamburger -->
     <div class="nav-icons">
-    <!--  <a href="tel:08663552344" class="nav-social-icon" title="LinkedIn" aria-label="LinkedIn">
+      <!-- <a href="tel:08663552344" class="nav-social-icon" title="LinkedIn" aria-label="LinkedIn">
         <img style="width:22px; height:22px; object-fit:contain;" src="./logo/linkedin.png">
       </a>
       <a href="https://wa.me/917997696104" class="nav-social-icon" title="Instagram" aria-label="Instagram">
@@ -63,7 +87,7 @@
       <a href="mailto:Support@owlegalassociates.com" class="nav-social-icon" title="Email" aria-label="Email">
         <img style="width:22px; height:22px; object-fit:contain;" src="./logo/download.png">
       </a> -->
-      <a href="#contact" class="nav-cta-btn">Contact Us</a> 
+      <a href="#contact" class="nav-cta-btn">Contact Us</a>
 
       <!-- Hamburger — mobile only -->
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
@@ -75,7 +99,7 @@
   <!-- ══════════════════════════════════════════════
        VERTICAL DOT NAV (auto-built by JS)
   ══════════════════════════════════════════════ -->
-  <nav class="dot-nav" id="dot-nav" aria-label="Section navigation"></nav>  
+  <nav class="dot-nav" id="dot-nav" aria-label="Section navigation"></nav>
 
   <!-- ══════════════════════════════════════════════
        HERO
