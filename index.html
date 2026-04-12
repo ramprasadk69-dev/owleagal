@@ -32,114 +32,45 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
-       TOP NAVIGATION
-       Logo left  |  Search icon + ||| icon right
+       TOP NAVIGATION BAR
+       Logo left | Nav links centre | Social icons + Contact CTA right
   ══════════════════════════════════════════════ -->
   <nav id="navbar">
     <a href="#hero" class="nav-logo">
-      <div><img style="width:40px; height: 40px;" src="./logo/logo.png" ></div>
+      <div><img style="width:40px; height: 40px;" src="./logo/logo.png"></div>
       O. W. Legal Associates®
     </a>
 
-    <div class="nav-icons">
-      <!-- Search icon -->
-      <button class="nav-search-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10.5" cy="10.5" r="6.5"/>
-          <line x1="15.5" y1="15.5" x2="21" y2="21"/>
-        </svg>
-      </button>
+    <!-- Primary nav links (centre) -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#people">About the Firm</a></li>
+      <li><a href="#thought">Legal Insights</a></li>
+      <li><a href="#legacy">Legacy</a></li>
+      <li><a href="#contact">Internship</a></li>
+      <li><a href="#contact">Careers</a></li>
+    </ul>
 
-      <!-- Three-vertical-bar (|||) menu button -->
-      <button class="nav-menu-btn" id="nav-menu-btn"
-              aria-label="Open navigation" aria-expanded="false"
-              aria-controls="side-nav">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+    <!-- Right: social icons + Contact CTA + mobile hamburger -->
+    <div class="nav-icons">
+      <a href="tel:08663552344" class="nav-social-icon" title="LinkedIn" aria-label="LinkedIn">
+        <img style="width:22px; height:22px; object-fit:contain;" src="./logo/linkedin.png">
+      </a>
+      <a href="https://wa.me/917997696104" class="nav-social-icon" title="Instagram" aria-label="Instagram">
+        <img style="width:22px; height:22px; object-fit:contain;" src="./logo/insta.avif">
+      </a>
+      <a href="mailto:Support@owlegalassociates.com" class="nav-social-icon" title="Email" aria-label="Email">
+        <img style="width:22px; height:22px; object-fit:contain;" src="./logo/download.png">
+      </a>
+      <a href="#contact" class="nav-cta-btn">Contact Us</a>
+
+      <!-- Hamburger — mobile only -->
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-
-  <!-- ══════════════════════════════════════════════
-       SIDE NAV OVERLAY (dark scrim)
-  ══════════════════════════════════════════════ -->
-  <div class="side-overlay" id="side-overlay" aria-hidden="true"></div>
-
-  <!-- ══════════════════════════════════════════════
-       SIDE NAV PANEL
-       Slides in from right on ||| click
-  ══════════════════════════════════════════════ -->
-  <aside class="side-nav" id="side-nav" role="dialog" aria-label="Site navigation">
-
-    <!-- Close button -->
-    <button class="side-close-btn" id="side-close-btn" aria-label="Close navigation">×</button>
-
-    <!-- Primary links -->
-    <ul>
-      <li>
-        <a href="#hero">
-          Home <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#expertise">
-          Expertise <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#people">
-          About the Firm <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#thought">
-          Legal Insights <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#legacy">
-          Legacy <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#contact">
-          Contact Us <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#contact">
-          Internship <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#contact">
-          Careers <span class="ln-arrow">→</span>
-        </a>
-      </li>
-      <li>
-        <a href="#contact">
-          Pro Bono <span class="ln-arrow">→</span>
-        </a>
-      </li>
-    </ul>
-
-    <!-- Footer links inside panel -->
-    <div class="side-nav-foot">
-      <table>
-        <td style="width: 50px;">
-          <tr><a href="tel:08663552344"><img style="width:40px; height: 40px;" src="./logo/linkedin.png" ></a></tr>
-        </td>
-        <td style="width: 50px;">
-          <tr><a href="https://wa.me/917997696104"><img style="width:40px; height: 40px;" src="./logo/insta.avif" ></a></tr>
-        </td>
-        <td style="width: 50px;">
-          <tr><a href="mailto:Support@owlegalassociates.com"><img style="width:50px; height: 50px;" src="./logo/download.png" ></a></tr>
-        </td>
-      </table>      
-    </div>
-
-  </aside>
 
   <!-- ══════════════════════════════════════════════
        VERTICAL DOT NAV (auto-built by JS)
