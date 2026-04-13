@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Update Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0f;
+    --paper: #f5f0e8;
+    --gold: #b8912a;
+    --gold-light: #d4aa4a;
+    --cream: #ede8db;
+    --muted: #7a7468;
+    --border: rgba(184,145,42,0.25);
+    --green: #1e7d4f;
+    --green-bg: #edf7f2;
+    --wa-green: #25d366;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* HEADER */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-seal {
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    position: relative;
+  }
+
+  .logo-seal::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+
+  .logo-text span { color: var(--gold); }
+
+  .header-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  .page-header {
+    margin-bottom: 48px;
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .page-header-left { flex: 1; }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .page-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 380px;
+    margin-top: 10px;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* PANEL */
+  .panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .panel:nth-child(2) { animation-delay: 0.1s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .panel-title-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .icon-gold { background: rgba(184,145,42,0.12); color: var(--gold); }
+  .icon-wa { background: rgba(37,211,102,0.12); color: var(--wa-green); }
+  .icon-mail { background: rgba(30,125,79,0.12); color: var(--green); }
+
+  .panel-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .panel-body { padding: 24px; }
+
+  /* FORM ELEMENTS */
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #e0d9cc;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,145,42,0.1);
+  }
+
+  textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237a7468' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* STATUS INDICATOR */
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .status-dot.active { background: var(--green); }
+  .status-dot.pending { background: var(--gold); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .status-text { font-size: 12px; color: var(--muted); }
+
+  /* PREVIEW BOX */
+  .preview-box {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre-wrap;
+    font-family: 'DM Mono', monospace;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+  }
+
+  .preview-box::-webkit-scrollbar { width: 4px; }
+  .preview-box::-webkit-scrollbar-track { background: transparent; }
+  .preview-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover::after { opacity: 0.1; }
+  .btn:active { transform: scale(0.98); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: white;
+  }
+
+  .btn-wa {
+    background: var(--wa-green);
+    color: white;
+    width: 100%;
+  }
+
+  .btn-mail {
+    background: var(--green);
+    color: white;
+    width: 100%;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover { color: var(--ink); border-color: var(--gold); }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* RECIPIENT CHIPS */
+  .chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+    border: 1px solid #e0d9cc;
+    border-radius: 3px;
+    background: var(--paper);
+    min-height: 42px;
+    cursor: text;
+  }
+
+  .chips-container:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,145,42,0.1); }
+
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(184,145,42,0.1);
+    border: 1px solid rgba(184,145,42,0.3);
+    color: var(--ink);
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .chip-remove {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+
+  .chip-remove:hover { color: #c0392b; }
+
+  .chips-input {
+    border: none !important;
+    background: transparent !important;
+    padding: 2px 4px !important;
+    min-width: 120px;
+    flex: 1;
+    box-shadow: none !important;
+  }
+
+  /* CASE SUMMARY CARD */
+  .case-summary {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 24px;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-summary::before {
+    content: '§';
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    opacity: 0.06;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .case-summary-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .case-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .case-meta-item label {
+    color: rgba(245,240,232,0.4);
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+
+  .case-meta-item .value {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--paper);
+  }
+
+  .case-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 12px;
+  }
+
+  /* TOAST NOTIFICATION */
+  .toast-container {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    min-width: 280px;
+    animation: toastIn 0.3s ease;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .toast-wa { background: var(--wa-green); color: white; }
+  .toast-mail { background: var(--green); color: white; }
+  .toast-icon { font-size: 18px; }
+
+  /* TEMPLATE PILLS */
+  .template-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .pill {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .pill:hover, .pill.active {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
+
+  /* WORD COUNT */
+  .field-meta {
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* FULL WIDTH SPAN */
+  .span-full { grid-column: 1 / -1; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    header { padding: 16px 20px; }
+    main { padding: 28px 16px 60px; }
+    .grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .case-meta { grid-template-columns: 1fr 1fr; }
+    .page-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  
+    <a href="#hero" class="nav-logo2">
+      <div><img style="width:40px; height: 40px;" src="./logo/logo.png"></div>
+      O. W. Legal Associates®
+    </a>
+
+    <!-- Primary nav links (centre) -->
+    <ul class="nav-links2" id="nav-links2">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#people">About Us</a></li>
+      <li><a href="#thought">Legal Insights</a></li>
+      <li><a href="#legacy">Legacy</a></li>
+      <li><a href="#contact">Internship</a></li>
+      <li><a href="#contact">Careers</a></li>
+    </ul>
+
+    <!-- Right: social icons + Contact CTA + mobile hamburger -->
+    <div class="nav-icons">
+      <!-- <a href="tel:08663552344" class="nav-social-icon" title="LinkedIn" aria-label="LinkedIn">
+        <img style="width:22px; height:22px; object-fit:contain;" src="./logo/linkedin.png">
+      </a>
+      <a href="https://wa.me/917997696104" class="nav-social-icon" title="Instagram" aria-label="Instagram">
+        <img style="width:22px; height:22px; object-fit:contain;" src="./logo/insta.avif">
+      </a>
+      <a href="mailto:Support@owlegalassociates.com" class="nav-social-icon" title="Email" aria-label="Email">
+        <img style="width:22px; height:22px; object-fit:contain;" src="./logo/download.png">
+      </a> -->
+	  <a href="caseUpdate.html" class="nav-cta-btn">Advocate Login</a>
+      <a href="#contact" class="nav-cta-btn">Contact Us</a>
+
+      <!-- Hamburger — mobile only -->
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+</header>
+
+<main>
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="eyebrow">Secure Client Outreach</div>
+      <h1>Send Case <em>Details</em><br>to Clients</h1>
+      <p class="page-sub">Dispatch case updates via WhatsApp or Email. All communications are logged and timestamped for the record.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEFT: Case Details Form -->
+    <div>
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">
+            <span class="panel-title-icon icon-gold">§</span>
+            Case Information
+          </span>
+          <span class="panel-tag">Required</span>
+        </div>
+        <div class="panel-body">
+
+          <div class="field-row">
+            <div class="field">
+              <label>Case Number</label>
+              <input type="text" id="caseNumber" placeholder="CAS-2024-00182" />
+            </div>
+            <div class="field">
+              <label>Case Type</label>
+              <select id="caseType">
+                <option value="">Select type…</option>
+                <option>Civil Litigation</option>
+                <option>Criminal Defence</option>
+                <option>Family Law</option>
+                <option>Corporate Law</option>
+                <option>Property Law</option>
+                <option>Labour Law</option>
+                <option>IP & Patent</option>
+                <option>Consumer Forum</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Client Full Name</label>
+            <input type="text" id="clientName" placeholder="e.g. Ravi Shankar Reddy" />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Court / Tribunal</label>
+              <input type="text" id="court" placeholder="e.g. High Court of AP" />
+            </div>
+            <div class="field">
+              <label>Hearing Date</label>
+              <input type="date" id="hearingDate" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Presiding Judge</label>
+              <input type="text" id="judge" placeholder="Hon'ble Justice…" />
+            </div>
+            <div class="field">
+              <label>Case Status</label>
+              <select id="caseStatus">
+                <option value="">Select status…</option>
+                <option>Under Review</option>
+                <option>Hearing Scheduled</option>
+                <option>Evidence Submission</option>
+                <option>Awaiting Verdict</option>
+                <option>Adjourned</option>
+                <option>Order Passed</option>
+                <option>Closed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Opposing Party</label>
+            <input type="text" id="opposingParty" placeholder="Name / Entity" />
+          </div>
+
+          <div class="field">
+            <label>Message Template</label>
+            <div class="template-pills">
+              <span class="pill" onclick="applyTemplate('hearing')">Hearing Notice</span>
+              <span class="pill" onclick="applyTemplate('adjournment')">Adjournment</span>
+              <span class="pill" onclick="applyTemplate('verdict')">Verdict Update</span>
+              <span class="pill" onclick="applyTemplate('docs')">Docs Required</span>
+            </div>
+            <textarea id="caseUpdate" placeholder="Enter case update / message for the client…" oninput="updateWordCount()"></textarea>
+            <div class="field-meta"><span id="wordCount">0 words</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Case Summary Card -->
+      <div class="case-summary" id="caseSummaryCard" style="display:none;">
+        <div class="case-summary-title">📋 Case at a Glance</div>
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <label>Case No.</label>
+            <div class="value" id="s_caseNumber">—</div>
+          </div>
+          <div class="case-meta-item">
+            <label>Type</label>
+            <div class="value" id="s_caseType">—</div>
+          </div>
+          <div class="case-meta-item">
+            <label>Status</label>
+            <div class="value" id="s_caseStatus">—</div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <label>Client</label>
+            <div class="value" id="s_clientName">—</div>
+          </div>
+          <div class="case-meta-item">
+            <label>Court</label>
+            <div class="value" id="s_court">—</div>
+          </div>
+          <div class="case-meta-item">
+            <label>Hearing</label>
+            <div class="value" id="s_hearingDate">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Send Via -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+
+	  <!-- Attachments note -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">
+            <span class="panel-title-icon icon-gold">📎</span>
+            Attachments
+          </span>
+          <span class="panel-tag">Optional</span>
+        </div>
+        <div class="panel-body">
+          <p style="font-size:13px; color:var(--muted); margin-bottom:14px; line-height:1.6;">Attach court orders, notices, or supporting documents to the communication.</p>
+          <label for="fileInput" style="display:flex; align-items:center; gap:10px; padding:14px; border:1.5px dashed var(--border); border-radius:3px; cursor:pointer; font-size:13px; color:var(--muted); transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,145,42,0.25)'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Click to upload files (PDF, DOCX, JPG)
+          </label>
+          <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none;" onchange="handleFiles(event)">
+          <div id="fileList" style="margin-top:10px; display:flex; flex-direction:column; gap:6px;"></div>
+        </div>
+      </div>
+	  
+      <!-- WhatsApp Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">
+            <span class="panel-title-icon icon-wa">✓</span>
+            Send via WhatsApp
+          </span>
+          <span class="panel-tag">Instant</span>
+        </div>
+        <div class="panel-body">
+          <div class="status-row">
+            <div class="status-dot active"></div>
+            <span class="status-text">WhatsApp Business API ready</span>
+          </div>
+
+          <div class="field">
+            <label>Client WhatsApp Number</label>
+            <input type="tel" id="waPhone" placeholder="+91 98765 43210" />
+          </div>
+
+          <div class="field">
+            <label>Message Preview</label>
+            <div class="preview-box" id="waPreview">Fill in case details to preview the WhatsApp message…</div>
+          </div>
+
+          <button class="btn btn-wa" onclick="sendWhatsApp()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Open in WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- Email Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">
+            <span class="panel-title-icon icon-mail">✉</span>
+            Send via Email
+          </span>
+          <span class="panel-tag">Formal</span>
+        </div>
+        <div class="panel-body">
+          <div class="status-row">
+            <div class="status-dot pending"></div>
+            <span class="status-text">Ready to compose via default mail client</span>
+          </div>
+
+          <div class="field">
+            <label>Recipient Email(s)</label>
+            <div class="chips-container" id="chipsContainer" onclick="document.getElementById('emailInput').focus()">
+              <input type="text" class="chips-input" id="emailInput" placeholder="Type email & press Enter…" onkeydown="handleChipInput(event)" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Subject Line</label>
+            <input type="text" id="emailSubject" placeholder="Auto-generated from case details" readonly style="color: var(--muted); cursor: default;" />
+          </div>
+
+          <div class="field">
+            <label>Email Body Preview</label>
+            <div class="preview-box" id="emailPreview">Fill in case details to preview the email…</div>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-mail" style="flex:1;" onclick="sendEmail()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+              Send Email
+            </button>
+            <button class="btn btn-outline" onclick="copyEmail()">Copy</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+  const emailChips = [];
+
+  // Live update preview as user types
+  const liveFields = ['caseNumber','caseType','clientName','court','hearingDate','judge','caseStatus','opposingParty','caseUpdate'];
+  liveFields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', refreshAll);
+    if (el) el.addEventListener('change', refreshAll);
+  });
+
+  function refreshAll() {
+    updatePreviews();
+    updateSummaryCard();
+  }
+
+  function updateWordCount() {
+    const text = document.getElementById('caseUpdate').value.trim();
+    const words = text ? text.split(/\s+/).length : 0;
+    document.getElementById('wordCount').textContent = `${words} word${words !== 1 ? 's' : ''}`;
+  }
+
+  function getData() {
+    return {
+      caseNumber: document.getElementById('caseNumber').value || 'N/A',
+      caseType: document.getElementById('caseType').value || 'N/A',
+      clientName: document.getElementById('clientName').value || 'Valued Client',
+      court: document.getElementById('court').value || 'N/A',
+      hearingDate: document.getElementById('hearingDate').value ? formatDate(document.getElementById('hearingDate').value) : 'N/A',
+      judge: document.getElementById('judge').value || 'N/A',
+      caseStatus: document.getElementById('caseStatus').value || 'N/A',
+      opposingParty: document.getElementById('opposingParty').value || 'N/A',
+      update: document.getElementById('caseUpdate').value || ''
+    };
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return 'N/A';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function buildWAMessage(d) {
+    return `⚖️ *CASE UPDATE — ${d.caseNumber}*\n\n` +
+      `Dear ${d.clientName},\n\n` +
+      `Greetings from our legal team. Please find below the latest update regarding your case:\n\n` +
+      `📋 *Case Details*\n` +
+      `• Case No: ${d.caseNumber}\n` +
+      `• Type: ${d.caseType}\n` +
+      `• Court: ${d.court}\n` +
+      `• Presiding Judge: ${d.judge}\n` +
+      `• Opposing Party: ${d.opposingParty}\n` +
+      `• Hearing Date: ${d.hearingDate}\n` +
+      `• Status: ${d.caseStatus}\n\n` +
+      (d.update ? `📝 *Update / Remarks*\n${d.update}\n\n` : '') +
+      `Please do not hesitate to contact our office for any queries.\n\n` +
+      `_This is an official communication from LexDispatch Legal Portal._`;
+  }
+
+  function buildEmailBody(d) {
+    return `Dear ${d.clientName},\n\nGreetings.\n\nThis is to formally update you regarding your case. Please find the details below:\n\n` +
+      `CASE DETAILS\n${'─'.repeat(40)}\n` +
+      `Case Number      : ${d.caseNumber}\n` +
+      `Case Type        : ${d.caseType}\n` +
+      `Court / Tribunal : ${d.court}\n` +
+      `Presiding Judge  : ${d.judge}\n` +
+      `Opposing Party   : ${d.opposingParty}\n` +
+      `Hearing Date     : ${d.hearingDate}\n` +
+      `Current Status   : ${d.caseStatus}\n` +
+      `${'─'.repeat(40)}\n\n` +
+      (d.update ? `CASE UPDATE / REMARKS\n${d.update}\n\n` : '') +
+      `Kindly acknowledge receipt of this communication. Should you have any questions or require further clarification, please contact our office at your earliest convenience.\n\n` +
+      `Yours sincerely,\n\nLegal Team\nLexDispatch Legal Services\nTel: +91-0891-000-0000 | Email: legal@lexdispatch.in`;
+  }
+
+  function updatePreviews() {
+    const d = getData();
+    const waMsg = buildWAMessage(d);
+    const emailMsg = buildEmailBody(d);
+    document.getElementById('waPreview').textContent = waMsg;
+    document.getElementById('emailPreview').textContent = emailMsg;
+    document.getElementById('emailSubject').value = `Case Update: ${d.caseNumber} — ${d.caseType} | Hearing: ${d.hearingDate}`;
+  }
+
+  function updateSummaryCard() {
+    const d = getData();
+    const hasSomeData = d.caseNumber !== 'N/A' || d.clientName !== 'Valued Client';
+    const card = document.getElementById('caseSummaryCard');
+    card.style.display = hasSomeData ? 'block' : 'none';
+    document.getElementById('s_caseNumber').textContent = d.caseNumber;
+    document.getElementById('s_caseType').textContent = d.caseType;
+    document.getElementById('s_caseStatus').textContent = d.caseStatus;
+    document.getElementById('s_clientName').textContent = d.clientName;
+    document.getElementById('s_court').textContent = d.court;
+    document.getElementById('s_hearingDate').textContent = d.hearingDate;
+  }
+
+  function sendWhatsApp() {
+    const phone = document.getElementById('waPhone').value.replace(/\D/g, '');
+    const d = getData();
+    const msg = buildWAMessage(d);
+
+    if (!phone) {
+      showToast('Please enter a WhatsApp number.', 'wa');
+      return;
+    }
+
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+    showToast('Opening WhatsApp with case details…', 'wa');
+  }
+
+  // Email chip input
+  function handleChipInput(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = e.target.value.trim().replace(',', '');
+      if (val && isValidEmail(val)) {
+        addChip(val);
+        e.target.value = '';
+      }
+    } else if (e.key === 'Backspace' && !e.target.value && emailChips.length) {
+      removeChip(emailChips[emailChips.length - 1]);
+    }
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function addChip(email) {
+    if (emailChips.includes(email)) return;
+    emailChips.push(email);
+    renderChips();
+  }
+
+  function removeChip(email) {
+    const idx = emailChips.indexOf(email);
+    if (idx > -1) emailChips.splice(idx, 1);
+    renderChips();
+  }
+
+  function renderChips() {
+    const container = document.getElementById('chipsContainer');
+    const input = document.getElementById('emailInput');
+    container.innerHTML = '';
+    emailChips.forEach(email => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.innerHTML = `${email} <span class="chip-remove" onclick="removeChip('${email}')">×</span>`;
+      container.appendChild(chip);
+    });
+    container.appendChild(input);
+    input.focus();
+  }
+
+  function sendEmail() {
+    // finalize any typed email
+    const raw = document.getElementById('emailInput').value.trim();
+    if (raw && isValidEmail(raw)) {
+      addChip(raw);
+      document.getElementById('emailInput').value = '';
+    }
+
+    if (!emailChips.length) {
+      showToast('Please add at least one recipient email.', 'mail');
+      return;
+    }
+
+    const d = getData();
+    const subject = document.getElementById('emailSubject').value;
+    const body = buildEmailBody(d);
+    const mailto = `mailto:${emailChips.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    showToast(`Email prepared for ${emailChips.length} recipient(s)`, 'mail');
+  }
+
+  function copyEmail() {
+    const d = getData();
+    const body = buildEmailBody(d);
+    navigator.clipboard.writeText(body).then(() => {
+      showToast('Email body copied to clipboard!', 'mail');
+    });
+  }
+
+  function showToast(message, type) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    const icon = type === 'wa' ? '✓' : '✉';
+    toast.innerHTML = `<span class="toast-icon">${icon}</span> ${message}`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+
+  // Template application
+  const templates = {
+    hearing: `Your next hearing has been scheduled. Please ensure you are present at the court premises 30 minutes prior to the scheduled time with all relevant documents. Failure to appear may result in an ex-parte order.`,
+    adjournment: `We wish to inform you that the hearing scheduled has been adjourned to a later date. The adjournment was necessitated due to [reason]. The next date of hearing shall be intimated to you shortly.`,
+    verdict: `We are pleased to inform you that the judgement in the above matter has been pronounced. Kindly visit our office at your earliest convenience to discuss the verdict and the way forward.`,
+    docs: `This is to inform you that the following documents are required to be submitted to our office at the earliest:\n\n1. Original title deed / agreement\n2. Identity proof (Aadhaar / Passport)\n3. Previous correspondence related to the case\n\nPlease arrange to courier or personally deliver the same at the earliest.`
+  };
+
+  function applyTemplate(key) {
+    document.getElementById('caseUpdate').value = templates[key];
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    updateWordCount();
+    refreshAll();
+  }
+
+  // File upload
+  function handleFiles(e) {
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = '';
+    Array.from(e.target.files).forEach(file => {
+      const div = document.createElement('div');
+      div.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:6px 10px;background:var(--paper);border:1px solid var(--border);border-radius:3px;';
+      div.innerHTML = `<span>📄</span> <span>${file.name}</span> <span style="margin-left:auto;font-family:DM Mono,monospace;">${(file.size/1024).toFixed(1)} KB</span>`;
+      fileList.appendChild(div);
+    });
+  }
+
+  // Initial preview
+  updatePreviews();
+</script>
+</body>
+</html>
